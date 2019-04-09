@@ -12,6 +12,10 @@ IF flight_list:LENGTH = 1 {
     require("launch_orbit").
     launch_orbit(90).
     GEAR ON.
+    SET TARGET TO "Mun".
+    require("hoh_transfer").
+    hoh_transfer().
+    SET TARGET TO "".
     SET step_exec TO 1.
   } ELSE {
     PRINT "Launch initiated outside of run condition.".
@@ -19,14 +23,15 @@ IF flight_list:LENGTH = 1 {
 }
 
 IF flight_list:LENGTH = 2 {
-  SET TARGET TO "Mun".
-  require("hoh_transfer").
-  hoh_transfer().
-  SET TARGET TO "".
-  SET step_exec TO 1.
+  require("circularize").
+  circularize().
 }
 
 IF flight_list:LENGTH = 3 {
+  // SET UP FOR ATMOSPHERIC REENTRY 
+}
+
+IF flight_list:LENGTH = 4 {
   IF BODY:NAME="Kerbin"{
     require("deorbit").
     deorbit().

@@ -8,7 +8,7 @@ function hoh_transfer {
     IF BODY = TARGET:BODY {
       SET trans_mnv TO NODE(TIME:SECONDS + 20,0,0,0).
       ADD trans_mnv.
-      SET trans_mnv TO hill_climb(2, (TARGET:APOAPSIS - TARGET:SOIRADIUS * 0.6), 1).
+      SET trans_mnv TO hill_climb(2, (TARGET:APOAPSIS - TARGET:RADIUS * 0.85), 1).
       LOCAL t2 IS trans_mnv:OBT:PERIOD / 2.
       LOCAL target_theta IS 360 * (t2 / TARGET:OBT:PERIOD).
       LOCAL t1 IS ( OBT:PERIOD * (180 + target_theta - LONGITUDE + TARGET:LONGITUDE) ) / ( 360 * (1 - ORBIT:PERIOD / TARGET:ORBIT:PERIOD)).
