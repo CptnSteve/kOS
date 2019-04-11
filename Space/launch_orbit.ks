@@ -39,6 +39,7 @@ function launch_orbit{
     IF step_counter = 4 {
       IF ALT:RADAR > 70000 {
         circularize().
+        execute_mnv().
         SET step_counter TO 99.
       }
     }

@@ -1,6 +1,5 @@
 
 function execute_mnv {
-  PARAMETER wait_bool IS 1.
   require("calc_isp").
   require("do_staging").
   SET mnv TO NEXTNODE.
@@ -10,12 +9,7 @@ function execute_mnv {
   LOCK burn_ETA TO (mnv:ETA - (burn_time / 2)).
   LOCK STEERING TO mnv:DELTAV.
   UNTIL vang(SHIP:FACING:VECTOR, mnv:DELTAV) < 0.25. {WAIT 0.}
-  IF wait_bool = 1 {
-    PRINT "Breaking until next maneuver.".
-    RETURN.
-  } ELSE {
-    WARPTO(time:seconds + burn_ETA - 10).
-  }
+  WARPTO(time:seconds + burn_ETA - 10).
   UNTIL burn_ETA <= 0 {WAIT 0.}
   set tset to 0.
   lock throttle to tset.

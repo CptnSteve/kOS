@@ -1,7 +1,6 @@
 
 function circularize {
   require("calc_stage_dV").
-  require("execute_mnv").
   require("hill_climb").
 
   UNTIL ALT:RADAR > 70000. {WAIT 0.}
@@ -21,5 +20,4 @@ function circularize {
     STAGE.
     WAIT 1.
   }
-  execute_mnv().
 }

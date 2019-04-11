@@ -23,8 +23,16 @@ IF flight_list:LENGTH = 1 {
 }
 
 IF flight_list:LENGTH = 2 {
-  require("circularize").
-  circularize().
+  IF BODY:NAME = "Mun" {
+    require("circularize").
+    circularize().
+    wipe_hd().
+    require("execute_mnv").
+    execute_mnv().
+    SET step_exec TO 1.
+  } ELSE {
+    PRINT "".
+  }
 }
 
 IF flight_list:LENGTH = 3 {
@@ -41,5 +49,6 @@ IF flight_list:LENGTH = 4 {
 
 IF step_exec = 1 {
   flight_list:ADD(flight_list:LENGTH).
+  SET step_exec TO 0.
 }
 WRITEJSON(flight_list,"1:/boot/flight_step.json").
